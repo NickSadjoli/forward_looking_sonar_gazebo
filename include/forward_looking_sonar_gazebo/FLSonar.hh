@@ -48,7 +48,7 @@ namespace rendering
 /// \class Sonar Sonar.hh rendering/rendering.hh
 /// \brief GPU based laser distance sensor
 class GZ_RENDERING_VISIBLE FLSonar
-  : public Camera, public Ogre::RenderObjectListener
+  : public Camera, public Ogre::RenderObjectListener //makes FLSonar class multi-inherit from Camera and RenderObjectListener classes
 {
   /// \brief Constructor
   /// \param[in] _namePrefix Unique prefix name for the camera.

@@ -41,8 +41,8 @@ namespace rendering
 //////////////////////////////////////////////////
 FLSonar::FLSonar(const std::string &_namePrefix, ScenePtr _scene,
                  const bool _autoRender)
-  : Camera(_namePrefix, _scene, false),
-    imageWidth(0),
+  : Camera(_namePrefix, _scene, false), //inherits the public function methods and variables (including objects) from Gazebo's Camera class.
+    imageWidth(0), //initialization list stating member objects (variables) within a class. Recommended method over assignments.
     imageHeight(0),
     binCount(0),
     beamCount(0),
@@ -51,7 +51,7 @@ FLSonar::FLSonar(const std::string &_namePrefix, ScenePtr _scene,
 }
 
 //////////////////////////////////////////////////
-FLSonar::~FLSonar()
+FLSonar::~FLSonar() //destructor for FLSonar
 {
   Ogre::TextureManager::getSingleton().remove(
     this->camTexture->getName());
