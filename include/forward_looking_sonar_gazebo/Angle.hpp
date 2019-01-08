@@ -1,5 +1,5 @@
-#ifndef __BASE_ANGLE_HH__
-#define __BASE_ANGLE_HH__
+#ifndef __GAZEBO_ROCK_ANGLE_HH__
+#define __GAZEBO_ROCK_ANGLE_HH__
 
 #include <math.h>
 #include <iostream>
@@ -35,7 +35,7 @@ public:
     /** 
      * default constructor, which will initialize the value to unknown (NaN)
      */
-    Angle() : rad(base::unknown<double>()) {}
+    Angle() : rad(gazebo::unknown<double>()) {}
     
 protected:
     explicit Angle( double _rad ) : rad(_rad)
@@ -106,7 +106,7 @@ public:
     static inline Angle unknown()
     {
         Angle result;
-        result.rad = base::unknown<double>();
+        result.rad = gazebo::unknown<double>();
         return result;
     }
 
@@ -239,7 +239,7 @@ public:
 
     /** Computes the unsigned angle of the rotation that makes +a+ colinear with +b+
      */
-    static Angle vectorToVector(const base::Vector3d& a, const base::Vector3d& b);
+    static Angle vectorToVector(const gazebo::Vector3d& a, const gazebo::Vector3d& b);
 
 
     /** Computes the angle of the rotation that makes +a+ colinear with +b+
@@ -248,7 +248,7 @@ public:
      * @c positive vector defining the positive rotation direction. @c positive
      * is required to be of unit length.
      */
-    static Angle vectorToVector(const base::Vector3d& a, const base::Vector3d& b, const base::Vector3d& positive);
+    static Angle vectorToVector(const gazebo::Vector3d& a, const gazebo::Vector3d& b, const gazebo::Vector3d& positive);
 };
 
 static inline Angle operator*( double a, Angle b )
@@ -314,7 +314,7 @@ public:
      * Returns the start angle of the segement
      * @return the start angle of the segement
      * */
-    base::Angle getStart() const;
+    gazebo::Angle getStart() const;
 
     /**
      * Returns the end angle of the segement
@@ -324,7 +324,7 @@ public:
      * getStart + getWidth;
      * @return the end angle of the segement
      * */
-    base::Angle getEnd() const;
+    gazebo::Angle getEnd() const;
     
     /**
      * Widht of the segment in radians

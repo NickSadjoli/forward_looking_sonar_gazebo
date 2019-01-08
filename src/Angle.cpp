@@ -1,8 +1,8 @@
-#include "Angle.hpp"
+#include "forward_looking_sonar_gazebo/Angle.hpp"
 #include <boost/format.hpp>
-#include <base/Eigen.hpp>
+#include "forward_looking_sonar_gazebo/Eigen.hpp"
 
-namespace base {
+namespace gazebo {
 
 Angle Angle::vectorToVector(const Vector3d& a, const Vector3d& b)
 {

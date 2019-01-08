@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS roslint
 find_package(OpenCV REQUIRED)
 find_package(GAZEBO REQUIRED)
 find_package(Boost REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 set(FORWARD_LOOKING_SONAR_GAZEBO "")
 
@@ -30,6 +31,7 @@ include_directories(
   ${GAZEBO_MSG_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
@@ -42,7 +44,15 @@ set(FORWARD_LOOKING_SONAR_GAZEBO_SRCS
 set(FORWARD_LOOKING_SONAR_GAZEBO_HEADERS
  include/${PROJECT_NAME}/FLSonar.hh
  include/${PROJECT_NAME}/FLSonarRos.hh
- include/${PROJECT_NAME}/SDFTool.hh)
+ include/${PROJECT_NAME}/Angle.hpp
+ include/${PROJECT_NAME}/Deprecated.hpp
+ include/${PROJECT_NAME}/Eigen.hpp
+ include/${PROJECT_NAME}/Float.hpp
+ include/${PROJECT_NAME}/RockSonar.hh
+ include/${PROJECT_NAME}/Sonar.hpp
+ include/${PROJECT_NAME}/SonarBeam.hpp
+ include/${PROJECT_NAME}/SonarScan.hpp
+ include/${PROJECT_NAME}/Time.hpp)
 
 roslint_cpp()
 
@@ -57,6 +67,16 @@ add_library(ForwardLookingSonarGazebo src/FLSonarRos.cc)
 target_link_libraries(ForwardLookingSonarGazebo ${catkin_LIBRARIES} ${FORWARD_LOOKING_SONAR_GAZEBO_LIST})
 add_dependencies(ForwardLookingSonarGazebo ${catkin_EXPORTED_TARGETS})
 list(APPEND FORWARD_LOOKING_SONAR_GAZEBO_LIST ForwardLookingSonarGazebo)
+
+add_library(RockFLS
+src/Angle.cpp
+src/SonarBeam.cpp
+src/SonarScan.cpp
+src/Sonar.cpp
+src/RockSonar.cpp
+src/Time.cpp)
+target_link_libraries(RockFLS ${catkin_LIBRARIES} ${FORWARD_LOOKING_SONAR_GAZEBO_LIST})
+list(APPEND FORWARD_LOOKING_SONAR_GAZEBO_LIST RockFLS)
 
 install(TARGETS ${FORWARD_LOOKING_SONAR_GAZEBO_LIST} ${FORWARD_LOOKING_SONAR_GAZEBO_LIST}
   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

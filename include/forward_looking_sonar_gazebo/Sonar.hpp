@@ -1,17 +1,17 @@
-#ifndef __BASE_SAMPLES_SONAR_HPP__
-#define __BASE_SAMPLES_SONAR_HPP__
+#ifndef __GAZEBO_ROCK_SONAR_HPP__
+#define __GAZEBO_ROCK_SONAR_HPP__
 
 #include <vector>
-#include <base/Float.hpp>
-#include <base/Time.hpp>
-#include <base/Angle.hpp>
-#include <base/Deprecated.hpp>
+#include "forward_looking_sonar_gazebo/Float.hpp"
+#include "forward_looking_sonar_gazebo/Time.hpp"
+#include "forward_looking_sonar_gazebo/Angle.hpp"
+#include "forward_looking_sonar_gazebo/Deprecated.hpp"
 BASE_TYPES_DEPRECATED_SUPPRESS_START
-#include <base/samples/SonarBeam.hpp>
-#include <base/samples/SonarScan.hpp>
+#include "forward_looking_sonar_gazebo/SonarBeam.hpp"
+#include "forward_looking_sonar_gazebo/SonarScan.hpp"
 BASE_TYPES_DEPRECATED_SUPPRESS_STOP
 
-namespace base { namespace samples {
+namespace gazebo {
 
 /** Representation of the data acquired by a sonar
  *
@@ -64,7 +64,7 @@ public:
      * algorithms expect one value. If you can't have *one*, then split your
      * scanning sonar into separate Sonar structure (one per beam).
      */
-    base::Time time;
+    gazebo::Time time;
 
     /** The time at which the beam(s) acquisition started
      *
@@ -73,7 +73,7 @@ public:
      *
      * @see getBeamAcquisitionStartTime 
      */
-    std::vector<base::Time> timestamps;
+    std::vector<gazebo::Time> timestamps;
     
     /** "Size" of one bin
      *
@@ -87,28 +87,28 @@ public:
      *
      * @see getBeamAcquisitionStartTime getBinStartTime getBinStartDistance
      */
-    base::Time bin_duration;
+    gazebo::Time bin_duration;
     
     /** Opening of the beam orthogonal to the device's Z direction
      *
      * This is usually along the scanning axis (for a scanning sonar), or in the
      * common plane of all the beams (for a multibeam sonar)
      */
-    base::Angle beam_width;
+    gazebo::Angle beam_width;
     
     /** Opening of the beam along the device's Z direction
      *
      * This is usually orthogonal to the scanning axis (for a scanning sonar),
      * or orthogonal to the common plane of all the beams (for a multibeam sonar)
      */
-    base::Angle beam_height;
+    gazebo::Angle beam_height;
 
     /** Each beam's bearing
      *
      * This is the position of the beam center with respect to the "front" of
      * the sonar (which is at 0)
      */
-    std::vector<base::Angle> bearings;
+    std::vector<gazebo::Angle> bearings;
 
     /** The speed of sound in water at the time of acquisition and in m/s*/
     float speed_of_sound;
@@ -138,7 +138,7 @@ public:
         , bin_count(0)
         , beam_count(0) {}
 
-    Sonar(base::Time time, base::Time bin_duration, int bin_count, base::Angle beam_width, base::Angle beam_height)
+    Sonar(gazebo::Time time, gazebo::Time bin_duration, int bin_count, gazebo::Angle beam_width, gazebo::Angle beam_height)
         : time(time)
         , bin_duration(bin_duration)
         , beam_width(beam_width)
@@ -149,7 +149,7 @@ public:
     {
     }
 
-    Sonar(base::Time time, base::Time bin_duration, int bin_count, base::Angle beam_width, base::Angle beam_height,
+    Sonar(gazebo::Time time, gazebo::Time bin_duration, int bin_count, gazebo::Angle beam_width, gazebo::Angle beam_height,
             int beam_count, bool per_beam_timestamps)
         : time(time)
         , bin_duration(bin_duration)
@@ -166,22 +166,22 @@ public:
 
     /** Initializes a Sonar structure to represent a single beam
      */
-    static Sonar fromSingleBeam(base::Time time, base::Time bin_duration, base::Angle beam_width, base::Angle beam_height,
-            std::vector<float> const& bins, base::Angle bearing = base::Angle(),
+    static Sonar fromSingleBeam(gazebo::Time time, gazebo::Time bin_duration, gazebo::Angle beam_width, gazebo::Angle beam_height,
+            std::vector<float> const& bins, gazebo::Angle bearing = gazebo::Angle(),
             float speed_of_sound = getSpeedOfSoundInWater());
 
     /** The start of a bin in the time domain, relative to the beam's
      * acquisition time
      */
-    base::Time getBinRelativeStartTime(unsigned int bin_idx) const;
+    gazebo::Time getBinRelativeStartTime(unsigned int bin_idx) const;
 
     /** The acquisition start of a beam
      */
-    base::Time getBeamAcquisitionStartTime(unsigned int beam) const;
+    gazebo::Time getBeamAcquisitionStartTime(unsigned int beam) const;
 
     /** The start of a bin in the time domain, absolute
      */
-    base::Time getBinTime(unsigned int bin, unsigned int beam) const;
+    gazebo::Time getBinTime(unsigned int bin, unsigned int beam) const;
 
     /** Returns the distance of the start of one bin relative to the sonar's
      * emission point */
@@ -196,7 +196,7 @@ public:
      * @arg interval the interval between two beams
      *
      */
-    void setRegularBeamBearings(base::Angle start, base::Angle interval);
+    void setRegularBeamBearings(gazebo::Angle start, gazebo::Angle interval);
 
     /** Add data for one beam
      *
@@ -208,16 +208,16 @@ public:
 
     /** Add data for one beam
      */
-    void pushBeam(std::vector<float> const& bins, base::Angle bearing);
+    void pushBeam(std::vector<float> const& bins, gazebo::Angle bearing);
 
     /** Add data for one beam
      */
-    void pushBeam(base::Time const& beam_time, std::vector<float> const& beam_bins);
+    void pushBeam(gazebo::Time const& beam_time, std::vector<float> const& beam_bins);
 
 
     /** Add data for one beam
      */
-    void pushBeam(base::Time const& beam_time, std::vector<float> const& beam_bins, base::Angle bearing);
+    void pushBeam(gazebo::Time const& beam_time, std::vector<float> const& beam_bins, gazebo::Angle bearing);
 
     /** Adds a set of bins to the bin set, updating beam_bins
      *
@@ -239,15 +239,15 @@ public:
 
     /** Add data for one beam
      */
-    void setBeam(unsigned int beam, std::vector<float> const& bins, base::Angle bearing);
+    void setBeam(unsigned int beam, std::vector<float> const& bins, gazebo::Angle bearing);
 
     /** Add data for one beam
      */
-    void setBeam(unsigned int beam, base::Time const& beam_time, std::vector<float> const& beam_bins);
+    void setBeam(unsigned int beam, gazebo::Time const& beam_time, std::vector<float> const& beam_bins);
 
     /** Add data for one beam
      */
-    void setBeam(unsigned int beam, base::Time const& beam_time, std::vector<float> const& beam_bins, base::Angle bearing);
+    void setBeam(unsigned int beam, gazebo::Time const& beam_time, std::vector<float> const& beam_bins, gazebo::Angle bearing);
 
     /** Adds a set of bins to the bin set, updating beam_bins
      *
@@ -264,7 +264,7 @@ public:
      * This is the bearing of the center of the beam. A zero bearing means the
      * front of the device
      */
-    base::Angle getBeamBearing(unsigned int beam) const;
+    gazebo::Angle getBeamBearing(unsigned int beam) const;
 
     /** Returns the bins of a given beam */
     std::vector<float> getBeamBins(unsigned int beam) const;
@@ -284,12 +284,12 @@ BASE_TYPES_DEPRECATED_SUPPRESS_START
 
     explicit Sonar(SonarBeam const& old, float gain = 1);
 
-    base::samples::SonarBeam toSonarBeam(float gain = 1);
+    gazebo::SonarBeam toSonarBeam(float gain = 1);
 
-    base::samples::SonarScan toSonarScan(float gain = 1);
+    gazebo::SonarScan toSonarScan(float gain = 1);
 BASE_TYPES_DEPRECATED_SUPPRESS_STOP
 };
 
-}} // namespaces
+} // namespaces
 
 #endif

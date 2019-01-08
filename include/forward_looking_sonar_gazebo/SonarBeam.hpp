@@ -1,11 +1,11 @@
-#ifndef BASE_SAMPLES_SONARBEAM_H__
-#define BASE_SAMPLES_SONARBEAM_H__
+#ifndef GAZEBO_ROCK_SONARBEAM_H__
+#define GAZEBO_ROCK_SONARBEAM_H__
 
 #include <boost/cstdint.hpp>
-#include <base/Time.hpp>
-#include <base/Angle.hpp>
+#include "forward_looking_sonar_gazebo/Time.hpp"
+#include "forward_looking_sonar_gazebo/Angle.hpp"
 
-namespace base { namespace samples {
+namespace gazebo { 
 
     struct SonarBeam {
         typedef boost::uint8_t uint8_t;
@@ -51,6 +51,6 @@ namespace base { namespace samples {
 
         void swap(SonarBeam &other);
     };
-}} 
+} 
 
 #endif

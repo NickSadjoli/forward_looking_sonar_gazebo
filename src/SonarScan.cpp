@@ -1,4 +1,4 @@
-#include "SonarScan.hpp"
+#include "forward_looking_sonar_gazebo/SonarScan.hpp"
 
 #include <stdint.h>
 #include <memory.h>
@@ -8,7 +8,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace base { namespace samples {
+namespace gazebo {
 
 SonarScan::SonarScan()
     : number_of_beams(0)
@@ -297,4 +297,4 @@ const uint8_t* SonarScan::getDataConstPtr() const
 }
 
 
-}} //end namespace base::samples
+} //end namespace base::samples

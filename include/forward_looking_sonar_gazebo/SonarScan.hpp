@@ -2,14 +2,14 @@
   \brief container for sonar scan data 
   */
 
-#ifndef BASE_SAMPLES_SONARSCAN_H__
-#define BASE_SAMPLES_SONARSCAN_H__
+#ifndef GAZEBO_ROCK_SONARSCAN_H__
+#define GAZEBO_ROCK_SONARSCAN_H__
 
-#include <base/Time.hpp>
-#include <base/Angle.hpp>
-#include <base/samples/SonarBeam.hpp>
+#include "forward_looking_sonar_gazebo/Time.hpp"
+#include "forward_looking_sonar_gazebo/Angle.hpp"
+#include "forward_looking_sonar_gazebo/SonarBeam.hpp"
 
-namespace base { namespace samples { 
+namespace gazebo { 
 
     struct SonarScan
     {
@@ -42,7 +42,7 @@ namespace base { namespace samples {
             //returns true if a sonar beam was already added for the given 
             //bearing 
             //internally time_beams is used for checking 
-            bool hasSonarBeam(const base::samples::SonarBeam &sonar_beam)const;
+            bool hasSonarBeam(const gazebo::SonarBeam &sonar_beam)const;
 
             bool hasSonarBeam(const Angle bearing)const;
 
@@ -52,7 +52,7 @@ namespace base { namespace samples {
             //otherwise the sonar scan will be resized (the start angle is not changed!)
             //
             //the memory layout must be one sonar beam per row otherwise the function will throw a std::runtime_error
-            void addSonarBeam(const base::samples::SonarBeam &sonar_beam,bool resize=true);
+            void addSonarBeam(const gazebo::SonarBeam &sonar_beam,bool resize=true);
 
             //returns a sonar beam for a given bearing 
             //throws an exception if the sonar scans holds no information for the given bearing
@@ -97,7 +97,7 @@ namespace base { namespace samples {
             const uint8_t *getDataConstPtr() const;
 
             //The time at which this sonar scan has been captured
-            base::Time                  time;
+            gazebo::Time                  time;
 
             //The raw data of the sonar scan
             std::vector<uint8_t>    	data;
@@ -107,7 +107,7 @@ namespace base { namespace samples {
             //the beam is regarded as not be set 
             //vector can be empty in this case time 
             //is used for all beams
-            std::vector<base::Time>    	time_beams;
+            std::vector<gazebo::Time>    	time_beams;
 
             //number of beams 
             //this can be interpreted as image width
@@ -158,7 +158,7 @@ namespace base { namespace samples {
             //polar coordinates (BlueView)
             bool polar_coordinates;
     };
-}}
+}
 
 #endif
 

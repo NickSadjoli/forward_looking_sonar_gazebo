@@ -1,5 +1,5 @@
-#ifndef ROCK_TIME_H__
-#define ROCK_TIME_H__
+#ifndef GAZEBO_ROCK_TIME_H__
+#define GAZEBO_ROCK_TIME_H__
 
 #include <cstdlib>
 #include <ostream>

@@ -1,9 +1,9 @@
-#include "SonarBeam.hpp"
+#include "forward_looking_sonar_gazebo/SonarBeam.hpp"
 
 #include <vector>
 #include <limits>
 
-namespace base { namespace samples {
+namespace gazebo { 
 
 SonarBeam::SonarBeam(const SonarBeam& other)
 {
@@ -61,5 +61,5 @@ void SonarBeam::swap(SonarBeam& other)
 }
 
 
-}} //end namespace base::samples
+} //end namespace base::samples
 

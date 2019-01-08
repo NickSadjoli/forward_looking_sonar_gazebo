@@ -1,7 +1,7 @@
-#include "Sonar.hpp"
+#include "forward_looking_sonar_gazebo/Sonar.hpp"
 #include <stdexcept>
 
-namespace base { namespace samples {
+namespace gazebo { 
 
 void Sonar::resize(int bin_count, int beam_count, bool per_beam_timestamps)
 {
@@ -257,4 +257,4 @@ SonarScan Sonar::toSonarScan(float gain)
     return sonar_scan;
 }
 
-}} //end namespace base::samples
+} //end namespace 
